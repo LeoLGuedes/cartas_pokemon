@@ -1,0 +1,1086 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Rubik:wght@400;500;600;700&display=swap');
+
+/* ========== RESET & BASE ========== */
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --bg: #f0f2f8;
+  --surface: #ffffff;
+  --surface-2: #f8f9fc;
+  --text: #1a1d2e;
+  --text-2: #64748b;
+  --border: #e2e8f0;
+  --primary: #4f46e5;
+  --primary-light: #eef2ff;
+  --danger: #ef4444;
+  --danger-light: #fef2f2;
+  --success: #10b981;
+  --radius: 14px;
+  --radius-sm: 8px;
+  --shadow: 0 2px 12px rgba(0,0,0,0.07);
+  --shadow-md: 0 4px 24px rgba(0,0,0,0.10);
+}
+
+body {
+  font-family: 'Rubik', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+}
+
+/* ========== APP LAYOUT ========== */
+.app {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.main-content {
+  flex: 1;
+  padding: 32px 24px;
+  max-width: 1400px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+/* ========== HEADER ========== */
+.header {
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+  padding: 0 32px;
+  height: 68px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  box-shadow: var(--shadow);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.header-brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.header-pokeball {
+  font-size: 22px;
+  color: var(--primary);
+  animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.7; transform: scale(0.92); }
+}
+
+.header-title {
+  font-family: 'Nunito', sans-serif;
+  font-size: 22px;
+  font-weight: 900;
+  color: var(--primary);
+  letter-spacing: -0.5px;
+}
+
+/* ========== NAV ========== */
+.header-nav {
+  display: flex;
+  align-items: center;
+}
+
+.nav-track {
+  position: relative;
+  display: flex;
+  align-items: center;
+  background: var(--bg);
+  border-radius: 50px;
+  padding: 4px;
+  gap: 2px;
+}
+
+.nav-indicador {
+  position: absolute;
+  top: 4px;
+  bottom: 4px;
+  background: var(--primary);
+  border-radius: 50px;
+  transition: left 0.35s cubic-bezier(0.4, 0, 0.2, 1),
+              width 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+  z-index: 0;
+  box-shadow: 0 2px 8px rgba(79,70,229,0.35);
+}
+
+.nav-btn {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 9px 20px;
+  border: none;
+  background: transparent;
+  border-radius: 50px;
+  font-family: 'Rubik', sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text-2);
+  cursor: pointer;
+  transition: color 0.2s;
+  white-space: nowrap;
+}
+
+.nav-btn.ativo {
+  color: #ffffff;
+  font-weight: 600;
+}
+
+.nav-icon {
+  font-size: 15px;
+}
+
+/* ========== SEÇÃO ========== */
+.secao {
+  animation: fadeUp 0.3s ease both;
+  min-height: calc(100vh - 68px - 64px); /* viewport - header - padding */
+  display: flex;
+  flex-direction: column;
+}
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.secao-header {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+  margin-bottom: 28px;
+}
+
+.secao-titulo {
+  font-family: 'Nunito', sans-serif;
+  font-size: 26px;
+  font-weight: 800;
+  color: var(--text);
+}
+
+.secao-subtitulo {
+  font-size: 14px;
+  color: var(--text-2);
+  margin-top: 2px;
+}
+
+.secao-contador {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--primary);
+  background: var(--primary-light);
+  padding: 3px 10px;
+  border-radius: 20px;
+}
+
+/* ========== GRID DE CARTAS ========== */
+.grid-cartas {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 18px;
+}
+
+/* ========== CARD ========== */
+.card-wrapper {
+  border-radius: var(--radius);
+  border: 2px solid transparent;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.card-wrapper:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-md);
+}
+
+.card {
+  border-radius: calc(var(--radius) - 2px);
+  padding: 18px;
+  height: 100%;
+}
+
+.card-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 8px;
+  margin-bottom: 10px;
+}
+
+.card-nome {
+  font-family: 'Nunito', sans-serif;
+  font-size: 17px;
+  font-weight: 800;
+  line-height: 1.2;
+  color: var(--text);
+}
+
+.card-badge {
+  font-size: 11px;
+  font-weight: 700;
+  padding: 3px 9px;
+  border-radius: 20px;
+  white-space: nowrap;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.tipo-icone svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.card-vida {
+  display: flex;
+  align-items: baseline;
+  gap: 5px;
+  margin-bottom: 12px;
+}
+
+.vida-label {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--text-2);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.vida-valor {
+  font-family: 'Nunito', sans-serif;
+  font-size: 26px;
+  font-weight: 900;
+  line-height: 1;
+}
+
+.card-ataques {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 10px;
+}
+
+.ataque {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  color: var(--text);
+  background: rgba(255,255,255,0.6);
+  padding: 5px 9px;
+  border-radius: var(--radius-sm);
+}
+
+.ataque-icone {
+  font-size: 11px;
+  opacity: 0.7;
+}
+
+.card-raridade {
+  font-size: 12px;
+  font-weight: 600;
+  margin-bottom: 12px;
+  letter-spacing: 0.3px;
+}
+
+.card-acoes {
+  display: flex;
+  gap: 8px;
+  margin-top: 12px;
+  align-items: center;
+}
+
+.btn-editar {
+  flex: 1;
+  padding: 7px;
+  border-radius: var(--radius-sm);
+  border: 1.5px solid;
+  background: transparent;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.15s;
+  font-family: 'Rubik', sans-serif;
+}
+
+.btn-editar:hover {
+  opacity: 0.8;
+  background: rgba(255,255,255,0.5);
+}
+
+.btn-excluir {
+  flex: 1;
+  padding: 7px;
+  border-radius: var(--radius-sm);
+  border: none;
+  background: var(--danger-light);
+  color: var(--danger);
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.15s;
+  font-family: 'Rubik', sans-serif;
+}
+
+.btn-excluir:hover {
+  background: var(--danger);
+  color: white;
+}
+
+.confirmar-exclusao {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--danger);
+  flex: 1;
+}
+
+.btn-confirmar {
+  padding: 4px 9px;
+  border-radius: 6px;
+  border: none;
+  background: var(--danger);
+  color: white;
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
+  font-family: 'Rubik', sans-serif;
+}
+
+.btn-cancelar-mini {
+  padding: 4px 9px;
+  border-radius: 6px;
+  border: 1px solid var(--border);
+  background: white;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  color: var(--text-2);
+  font-family: 'Rubik', sans-serif;
+}
+
+/* ========== FORM EDIÇÃO ========== */
+.form-edicao {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.form-edicao-titulo {
+  font-family: 'Nunito', sans-serif;
+  font-size: 14px;
+  font-weight: 800;
+  color: var(--text-2);
+  margin-bottom: 4px;
+}
+
+.form-edicao input,
+.form-edicao select {
+  padding: 8px 10px;
+  border-radius: var(--radius-sm);
+  border: 1.5px solid var(--border);
+  font-size: 13px;
+  font-family: 'Rubik', sans-serif;
+  background: white;
+  color: var(--text);
+  transition: border-color 0.15s;
+  width: 100%;
+}
+
+.form-edicao input:focus,
+.form-edicao select:focus {
+  outline: none;
+  border-color: var(--primary);
+}
+
+.form-edicao-acoes {
+  display: flex;
+  gap: 8px;
+  margin-top: 4px;
+}
+
+.btn-salvar {
+  flex: 1;
+  padding: 8px;
+  border-radius: var(--radius-sm);
+  border: none;
+  background: var(--primary);
+  color: white;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  font-family: 'Rubik', sans-serif;
+  transition: opacity 0.15s;
+}
+
+.btn-salvar:hover { opacity: 0.88; }
+
+.btn-cancelar {
+  flex: 1;
+  padding: 8px;
+  border-radius: var(--radius-sm);
+  border: 1.5px solid var(--border);
+  background: white;
+  color: var(--text-2);
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  font-family: 'Rubik', sans-serif;
+}
+
+/* ========== BUSCA ========== */
+.form-busca {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 28px;
+  max-width: 560px;
+}
+
+.input-busca {
+  flex: 1;
+  padding: 12px 18px;
+  border-radius: 50px;
+  border: 2px solid var(--border);
+  font-size: 15px;
+  font-family: 'Rubik', sans-serif;
+  background: var(--surface);
+  color: var(--text);
+  transition: border-color 0.2s;
+}
+
+.input-busca:focus {
+  outline: none;
+  border-color: var(--primary);
+}
+
+.btn-buscar {
+  padding: 12px 24px;
+  border-radius: 50px;
+  border: none;
+  background: var(--primary);
+  color: white;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  font-family: 'Rubik', sans-serif;
+  transition: opacity 0.15s;
+  white-space: nowrap;
+}
+
+.btn-buscar:disabled { opacity: 0.6; cursor: not-allowed; }
+.btn-buscar:hover:not(:disabled) { opacity: 0.88; }
+
+.busca-resultado-info {
+  font-size: 14px;
+  color: var(--text-2);
+  margin-bottom: 16px;
+  font-weight: 500;
+}
+
+/* ========== FORMULÁRIO NOVA CARTA ========== */
+.secao-form {
+  max-width: 640px;
+  margin: 0 auto;
+}
+
+.form-card {
+  background: var(--surface);
+  border-radius: var(--radius);
+  padding: 32px;
+  box-shadow: var(--shadow);
+  border: 1px solid var(--border);
+}
+
+.form-nova-carta {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.campo-grupo {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.campo-grupo label {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-2);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.campo-grupo input,
+.campo-grupo select {
+  padding: 12px 16px;
+  border-radius: var(--radius-sm);
+  border: 1.5px solid var(--border);
+  font-size: 15px;
+  font-family: 'Rubik', sans-serif;
+  color: var(--text);
+  background: var(--surface-2);
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.campo-grupo input:focus,
+.campo-grupo select:focus {
+  outline: none;
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(79,70,229,0.1);
+  background: white;
+}
+
+.campos-linha {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+}
+
+.btn-cadastrar {
+  padding: 14px;
+  border-radius: var(--radius-sm);
+  border: none;
+  background: var(--primary);
+  color: white;
+  font-size: 15px;
+  font-weight: 700;
+  cursor: pointer;
+  font-family: 'Rubik', sans-serif;
+  transition: opacity 0.2s, transform 0.1s;
+  margin-top: 4px;
+}
+
+.btn-cadastrar:hover:not(:disabled) {
+  opacity: 0.88;
+  transform: translateY(-1px);
+}
+
+.btn-cadastrar:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* ========== ESTADOS ========== */
+.tela-estado {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  padding: 60px 20px;
+  color: var(--text-2);
+  font-size: 15px;
+}
+
+.tela-estado-suave {
+  opacity: 0.7;
+}
+
+.estado-icone {
+  font-size: 48px;
+  opacity: 0.5;
+}
+
+.spinner {
+  width: 36px;
+  height: 36px;
+  border: 3px solid var(--border);
+  border-top-color: var(--primary);
+  border-radius: 50%;
+  animation: spin 0.7s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* ========== TOAST ========== */
+.toast {
+  position: fixed;
+  bottom: 28px;
+  right: 28px;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 20px;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-md);
+  font-size: 14px;
+  font-weight: 600;
+  animation: slideIn 0.3s cubic-bezier(0.4,0,0.2,1);
+  font-family: 'Rubik', sans-serif;
+}
+
+@keyframes slideIn {
+  from { opacity: 0; transform: translateX(40px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+.toast-sucesso {
+  background: #ecfdf5;
+  color: #065f46;
+  border: 1px solid #a7f3d0;
+}
+
+.toast-erro {
+  background: var(--danger-light);
+  color: #991b1b;
+  border: 1px solid #fecaca;
+}
+
+.toast-icone {
+  font-size: 16px;
+}
+
+/* ========== CARD TIPO GRUPO (ícone fora do badge) ========== */
+.card-tipo-grupo {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  flex-shrink: 0;
+}
+
+.card-tipo-icone-externo {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  /* background e color vêm do inline style — só layout aqui */
+}
+
+.card-tipo-icone-externo svg {
+  display: block;
+}
+
+/* Remove o ícone de dentro do badge (agora está fora) */
+.card-badge {
+  gap: 0;
+}
+
+/* Card clicável */
+.card-clicavel {
+  cursor: pointer;
+}
+
+.card-wrapper:has(.card-clicavel):hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 28px rgba(0,0,0,0.13);
+}
+
+/* Dica visual de clique */
+.card-wrapper:has(.card-clicavel)::after {
+  content: 'Ver detalhes';
+  position: absolute;
+  bottom: 8px;
+  left: 50%;
+  transform: translateX(-50%) translateY(4px);
+  background: rgba(0,0,0,0.65);
+  color: white;
+  font-size: 11px;
+  font-weight: 600;
+  padding: 3px 10px;
+  border-radius: 20px;
+  opacity: 0;
+  transition: opacity 0.2s, transform 0.2s;
+  pointer-events: none;
+  white-space: nowrap;
+  font-family: 'Rubik', sans-serif;
+}
+
+.card-wrapper:has(.card-clicavel) {
+  position: relative;
+}
+
+.card-wrapper:has(.card-clicavel):hover::after {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
+/* ========== DETALHE CARTA (MODAL) ========== */
+.dc-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(10, 10, 20, 0.7);
+  backdrop-filter: blur(6px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 500;
+  padding: 20px;
+  animation: dc-fadeIn 0.2s ease;
+}
+
+@keyframes dc-fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+.dc-carta {
+  position: relative;
+  width: 340px;
+  border-radius: 20px;
+  border: 3px solid;
+  box-shadow: 0 24px 64px rgba(0,0,0,0.35), 0 0 0 1px rgba(255,255,255,0.1) inset;
+  overflow: hidden;
+  animation: dc-slideUp 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+@keyframes dc-slideUp {
+  from { opacity: 0; transform: scale(0.88) translateY(24px); }
+  to   { opacity: 1; transform: scale(1) translateY(0); }
+}
+
+/* Efeito holo para cartas raras */
+.dc-carta-brilho {
+  box-shadow:
+    0 24px 64px rgba(0,0,0,0.35),
+    0 0 0 1px rgba(255,255,255,0.15) inset,
+    0 0 40px rgba(255,255,255,0.08);
+}
+
+.dc-carta-brilho::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    135deg,
+    transparent 20%,
+    rgba(255,255,255,0.08) 40%,
+    rgba(255,255,255,0.12) 50%,
+    rgba(255,255,255,0.08) 60%,
+    transparent 80%
+  );
+  pointer-events: none;
+  z-index: 10;
+}
+
+/* Botão fechar */
+.dc-fechar {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  z-index: 20;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  border: none;
+  background: rgba(255,255,255,0.25);
+  backdrop-filter: blur(4px);
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.15s;
+  padding: 0;
+  line-height: 1;
+}
+
+.dc-fechar:hover {
+  background: rgba(255,255,255,0.45);
+}
+
+/* Topo */
+.dc-topo {
+  padding: 18px 18px 12px;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 8px;
+  border-bottom: 1px solid;
+}
+
+.dc-topo-nome-vida {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  flex: 1;
+  min-width: 0;
+}
+
+.dc-nome {
+  font-family: 'Nunito', sans-serif;
+  font-size: 22px;
+  font-weight: 900;
+  line-height: 1.1;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.dc-vida-grupo {
+  display: flex;
+  align-items: baseline;
+  gap: 4px;
+}
+
+.dc-vida-label {
+  font-size: 10px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  opacity: 0.7;
+}
+
+.dc-vida-valor {
+  font-family: 'Nunito', sans-serif;
+  font-size: 28px;
+  font-weight: 900;
+  line-height: 1;
+}
+
+/* Tipo no detalhe: ícone fora, badge com texto */
+.dc-tipo-grupo {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  flex-shrink: 0;
+  padding-top: 4px;
+}
+
+.dc-tipo-icone-externo {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  /* background e color vêm do inline style */
+}
+
+.dc-tipo-icone-externo svg {
+  display: block;
+  filter: drop-shadow(0 1px 2px rgba(0,0,0,0.15));
+}
+
+.dc-tipo-badge {
+  font-size: 11px;
+  font-weight: 800;
+  padding: 4px 10px;
+  border-radius: 20px;
+  color: white;
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+}
+
+/* Área de imagem */
+.dc-imagem-area {
+  position: relative;
+  height: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.dc-imagem {
+  max-height: 185px;
+  max-width: 100%;
+  object-fit: contain;
+  filter: drop-shadow(0 8px 20px rgba(0,0,0,0.25));
+  transition: transform 0.3s ease;
+  position: relative;
+  z-index: 2;
+}
+
+.dc-carta:hover .dc-imagem {
+  transform: translateY(-4px) scale(1.03);
+}
+
+.dc-img-placeholder {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  color: rgba(0,0,0,0.3);
+}
+
+.dc-img-erro span {
+  font-size: 48px;
+  opacity: 0.3;
+  font-family: 'Nunito', sans-serif;
+  font-weight: 900;
+}
+
+.dc-img-erro p {
+  font-size: 12px;
+  opacity: 0.5;
+}
+
+.dc-spinner {
+  width: 28px;
+  height: 28px;
+}
+
+/* Efeito holo sobre a imagem */
+.dc-holo-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    135deg,
+    rgba(255,100,100,0.06) 0%,
+    rgba(100,255,100,0.06) 25%,
+    rgba(100,100,255,0.06) 50%,
+    rgba(255,255,100,0.06) 75%,
+    rgba(255,100,255,0.06) 100%
+  );
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Informações abaixo da imagem */
+.dc-info {
+  padding: 14px 18px 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+/* Raridade com estrelas */
+.dc-raridade-estrelas {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+}
+
+.dc-estrela {
+  font-size: 16px;
+  line-height: 1;
+  transition: transform 0.15s;
+}
+
+.dc-estrela-ativa {
+  filter: drop-shadow(0 0 3px currentColor);
+}
+
+.dc-estrela-brilho {
+  animation: dc-brilho-estrela 1.8s ease-in-out infinite alternate;
+}
+
+.dc-estrela-brilho:nth-child(2) { animation-delay: 0.2s; }
+.dc-estrela-brilho:nth-child(3) { animation-delay: 0.4s; }
+.dc-estrela-brilho:nth-child(4) { animation-delay: 0.6s; }
+.dc-estrela-brilho:nth-child(5) { animation-delay: 0.8s; }
+
+@keyframes dc-brilho-estrela {
+  from { filter: drop-shadow(0 0 2px currentColor); opacity: 0.85; }
+  to   { filter: drop-shadow(0 0 7px currentColor); opacity: 1; }
+}
+
+.dc-raridade-label {
+  font-size: 12px;
+  font-weight: 700;
+  margin-left: 6px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* Ataques */
+.dc-ataques {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.dc-ataque {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 8px 12px;
+  background: rgba(255,255,255,0.55);
+  border-radius: 10px;
+  border-left: 3px solid;
+}
+
+.dc-ataque-label {
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  opacity: 0.75;
+}
+
+.dc-ataque-nome {
+  font-size: 14px;
+  font-weight: 600;
+  color: #1a1d2e;
+}
+
+/* Rodapé */
+.dc-rodape {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 10px;
+  border-top: 1px solid;
+}
+
+.dc-id {
+  font-family: 'Nunito', sans-serif;
+  font-size: 12px;
+  font-weight: 800;
+  opacity: 0.5;
+}
+
+.dc-marca {
+  font-family: 'Nunito', sans-serif;
+  font-size: 11px;
+  font-weight: 900;
+  opacity: 0.4;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+/* ========== RESPONSIVO ========== */
+@media (max-width: 700px) {
+  .header {
+    padding: 0 16px;
+    flex-direction: column;
+    height: auto;
+    padding: 12px 16px;
+    gap: 10px;
+  }
+
+  .nav-btn span:last-child {
+    display: none;
+  }
+
+  .main-content {
+    padding: 20px 12px;
+  }
+
+  .campos-linha {
+    grid-template-columns: 1fr;
+  }
+
+  .form-busca {
+    flex-direction: column;
+  }
+
+  .grid-cartas {
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  }
+}
