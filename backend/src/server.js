@@ -22,7 +22,7 @@ app.listen(PORT, () => {
     console.log(`servidor rodando em http://localhost:${PORT}`);
 });
 
-//to testando, vendo se o fluxo vai acontecer com esse novo comentário
+//to testando, vendo se o fluxo vai acontecer com esse novo comentário. Antes tava dando problema de comparação pois o agente IA não sabia onde estava o main, sera que agora ele sabe?
 
 
 
