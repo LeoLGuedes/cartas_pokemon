@@ -33,13 +33,17 @@ jobs:
       - name: Enviar Relatório por Email (Resend)
         if: success()
         run: |
-          CONTEUDO=$(cat relatorio_auditoria.md | jq -Rs .)
-          curl -s -X POST "https://api.resend.com/emails" \
-            -H "Authorization: Bearer ${{ secrets.RESEND_API_KEY }}" \
-            -H "Content-Type: application/json" \
-            -d "{
-              \"from\": \"Bug Hunter AI <onboarding@resend.dev>\",
-              \"to\": [\"${{ secrets.EMAIL_DESTINO }}\"],
-              \"subject\": \"🤖 Relatório de Auditoria IA - Novos Commits\",
-              \"text\": ${CONTEUDO}
-            }"
+          if [ -f relatorio_auditoria.md ]; then
+            CONTEUDO=$(cat relatorio_auditoria.md | jq -Rs .)
+            curl -s -X POST "https://api.resend.com/emails" \
+              -H "Authorization: Bearer ${{ secrets.RESEND_API_KEY }}" \
+              -H "Content-Type: application/json" \
+              -d "{
+                \"from\": \"Bug Hunter AI <onboarding@resend.dev>\",
+                \"to\": [\"${{ secrets.EMAIL_DESTINO }}\"],
+                \"subject\": \"🤖 Relatório de Auditoria IA - Novos Commits\",
+                \"text\": ${CONTEUDO}
+              }"
+          else
+            echo "Nenhum relatório gerado. Pulando envio de email."
+          fi

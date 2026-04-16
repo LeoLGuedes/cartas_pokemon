@@ -172,7 +172,7 @@ if __name__ == "__main__":
     print("  Bug Hunter AI — Auditoria de Projeto React/Express/MySQL")
     print("=" * 60)
 
-    codigo = ler_arquivos_modificados("main")
+    codigo = ler_arquivos_modificados("origin/main")
     if not codigo.strip():
         print("Nenhum arquivo JS/TS modificado em relação à branch main. Auditoria não necessária.")
         exit(0)
